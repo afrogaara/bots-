@@ -11,7 +11,7 @@ def buscar_site(url):
     except Exception as error:
         print(error)    
 
-
+#Parte principal 
 def parsing_html(response_html):
     try:
         soup = BeautifulSoup(response_html, 'html.parser')
@@ -23,10 +23,29 @@ def parsing_html(response_html):
         print(error)
     
 
+#Encontra o inicio e o fechamento da tag 
+#E da tag vc pega apenas os links 
 def find_all_links(html):
-    links = html.find_all("a")
-    for link in links: 
-        print(link["href"])
+    try:
+        links = html.find_all("a")
+        for link in links: 
+            print(link["href"])
+    except Exception as error:
+        print("Link não encontrado" ,error)
+
+def find_all_class(html):
+    try:
+        links = html.find_all("a")    
+        for link in links:
+            print(link["class"])
+    except Exception as error:
+        print(error)
+
+def chosse_class(soup):
+    opc = input("Digite um dos class a cima: ")
+    sourcerr = soup.find("div", class_=opc)
+    print(sourcerr)
+
 
 url = input("URL: ")
 
@@ -36,6 +55,6 @@ if __name__== "__main__":
     soup = buscar_site(url)
     if soup:
         html = parsing_html(soup)
-        find_all_links(html)
-
+        find_all_class(html)
+        chosse_class(html)        
 # https://www.crummy.com/software/BeautifulSoup/bs4/doc/
