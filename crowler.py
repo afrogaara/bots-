@@ -64,6 +64,13 @@ def chosse_class(html):
     except:
         print("não encontrado!")
 
+def encontrar_telefones():
+    pass
+
+
+def econtrar_emails():
+    pass
+
 
 url = input("URL: ")
 
