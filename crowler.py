@@ -44,31 +44,46 @@ def find_all_links(html):
     pass
 
 def find_all_class(html):
+    lista = list() 
     try:
         links = html.find_all("a")    
-        for link in links:
-            print(link["class"])
+        for cada in links:
+            link = cada["class"]
+            lista.append(link)
+        
     except Exception as error:
         print(error)
+    
+    return lista 
 
-def chosse_class(html):
+
+def chosse_class(lista):
     links = list() 
-    opc = input("Digite um dos class a cima: ")
-    try:
-        m = html.find("div", class_=opc)
-        f = m.find_all("a")
-        for cada in f:
+    for c in lista:    
+        for linha in c:
+            try:
+                m = html.find("div", class_=linha)
+                f = m.find_all("a")
+            except:
+                pass
+            
+    for cada in f:
+        try:    
             link = cada['href']
-            links.append(link)
-        return links 
-    except:
-        print("não encontrado!")
+            links.append(link) 
+        except:
+            pass
+    return links 
 
-def encontrar_telefones():
-    pass
+def encontrar_telefones(link):
+    for cada in link:
+        try:
+            columbs = soup.find_all("div", class_= cada)
+            print(columbs)
+        except: 
+            pass
 
-
-def econtrar_emails():
+def econtrar_emails(soup):
     pass
 
 
@@ -79,6 +94,7 @@ if __name__== "__main__":
     soup = buscar_site(url)
     if soup:
         html = parsing_html(soup)
+        
     while True:
         menu(url)
         opc = input(": ")[0]
@@ -86,10 +102,11 @@ if __name__== "__main__":
             find_all_links(html)
         
         if opc == '2':   
-            find_all_class(html)
-            link = chosse_class(html)        
+            a = find_all_class(html)
+            link = chosse_class(a)  
             print(link)
-        
+            encontrar_telefones(link)      
+                 
         if opc == '3':
             break
             
