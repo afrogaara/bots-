@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup # manipular html
 
 def cabecalho():
     header = dict()
-    header['User_Agent'] = input(": ")
+    header['User_Agent'] = input("User-Agent: ")
 
 
 def buscar_site(url, header):
@@ -33,11 +33,11 @@ def parsing_site(response_html):
 
 def links_site(parsing):
     lista_links = list()
-    
+
     try:
         links = parsing.find_all("a")    
         for tag in links:
-            
+
             print(tag["href"])
             link = tag["href"]
             
@@ -65,54 +65,24 @@ def class_site(parsing):
         pass
     return lista 
     
-def encontrar_links(lista, parsing):
-    href = list()
-    for links in lista:
-        for link in links:
-            print(link, end="  ")
-    print("\n")
-    opc = input(": ")    
-    
-    try:
-        m = parsing.find('div', class_=opc)
-        f = m.find_all("a")
-        print(f)
-    except:
-        print("não foi encontrado")
-    for cada in f:
-        try:    
-            link = cada['href']
-            href.append(cada) 
-            print(cada)
-        except:
-            pass
-    
-
-def encontrar_telefones(link):
-    for cada in link:
-        try:
-            columbs = soup.find_all("div", class_= cada)
-            print(columbs)
-        except: 
-            print("nada encontrado!")
-
-def econtrar_emails(soup):
+def encontrar_links():
     pass
-
+def encontrar_telefones():
+    pass
+def econtrar_emails():
+    pass
 
 url = input("URL: ")
 
-crowler = set() 
+crowler = set()
 
 if __name__== "__main__":
     header = cabecalho()
     soup = buscar_site(url, header)
     if soup:
         parsing = parsing_site(soup)
-        link = links_site(parsing) 
-	
+        link = links_site(parsing)
+
         #lista = class_site(parsing)
         #encontrar_links(lista, parsing)
-        
 # https://www.crummy.com/software/BeautifulSoup/bs4/doc/
-
